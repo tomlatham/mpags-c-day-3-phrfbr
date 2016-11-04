@@ -3,23 +3,33 @@
 
 #include "CaesarCipher.hpp"
 
+/** The CaesarCipher.cpp part that actually defines what is going to be done
+	*
+	*
+	*
+**/
+
+/// Calling the CaesarCipher class
 CaesarCipher::CaesarCipher(size_t& key) 
 	:key_{key}
 
 {
 }
 
-std::string CaesarCipher::applyCipher(const std::string& inputText, const bool encrypt) const
+/// Call the applyCipher 
+std::string CaesarCipher::applyCipher(const std::string& inputText, CipherMode encrypt) const
 {
+
+/// Do the CaesarCipher
 
   // Create the output string
   std::string outputText {};
 
   // Create the alphabet container
-//  const std::vector<char> alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
   const size_t alphabetSize = alphabet_.size();
 
-  // Loop over the input text
+  /// Loop over the input text
   char processedChar {'x'};
   for ( const auto& origChar : inputText ) {
 
@@ -29,10 +39,10 @@ std::string CaesarCipher::applyCipher(const std::string& inputText, const bool e
 
       if ( origChar == alphabet_[i] ) {
 
-	// Apply the appropriate shift (depending on whether we're encrypting
-	// or decrypting) and determine the new character
+	/** Apply the appropriate shift (depending on whether we're encrypting
+	   or decrypting) and determine the new character **/
 	// Can then break out of the loop over the alphabet
-	if ( encrypt ) {
+	if ( encrypt == CipherMode::encrypt ) {
 	  processedChar = alphabet_[ (i + key_) % alphabetSize ];
 	} else {
 	  processedChar = alphabet_[ (i + alphabetSize - key_) % alphabetSize ];
@@ -44,6 +54,8 @@ std::string CaesarCipher::applyCipher(const std::string& inputText, const bool e
     // Add the new character to the output text
     outputText += processedChar;
   }
+
+/// Output the Encrypted/Decrypted text 
 
   return outputText;
 }

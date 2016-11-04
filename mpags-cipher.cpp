@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
   // Options that might be set by the command-line arguments
 
-  ProgramSettings prog_settings{false,false,"","","",true};
+  ProgramSettings prog_settings{false,false,"","","", CipherMode::encrypt};
 
   // Process command line arguments
   bool cmdLineStatus { processCommandLine(cmdLineArgs, prog_settings )};
@@ -112,8 +112,6 @@ int main(int argc, char* argv[])
 
   CaesarCipher caesar{caesar_key};
   std::string outputText { caesar.applyCipher(inputText, prog_settings.encrypt)};
-
-//  std::string outputText { runCaesarCipher( inputText, caesar_key, prog_settings.encrypt ) };
 
   // Output the transliterated text
   if (!prog_settings.outputFile.empty()) {
