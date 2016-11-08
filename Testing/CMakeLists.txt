@@ -14,3 +14,7 @@ target_include_directories(Catch INTERFACE ${CMAKE_CURRENT_LIST_DIR})
 add_executable(testTransformChar testTransforChar.cpp)
 target_link_libraries(testTransformChar MPAGSCipher Catch)
 add_test(NAME test-transformchar COMMAND testTransformChar)
+
+add_executable(testCaesarCipher testCaesarCipher.cpp)
+target_link_libraries(testCaesarCipher MPAGSCipher Catch)
+add_test(NAME test-caesarcipher COMMAND testCaesarCipher)
