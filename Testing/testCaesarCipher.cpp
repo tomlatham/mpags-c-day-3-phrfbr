@@ -9,38 +9,32 @@
 
 TEST_CASE("Caesar Cipher encrypt has been implemented", "[alphanumeric]") {
 
-	std::vector<char> caesarText{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-
-	std::vector<char> encryptText{'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z','A', 'B', 'C', 'D', 'E'};
+	std::vector<std::string> plainText{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+	std::vector<std::string> encryptText{"F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E"};
 	
 
-	const size_t textSize = caesarText.size();
-	int key = 5; // define a key to test here
+	const size_t textSize = plainText.size();
+	const size_t key = 5; // define a key to test here
+	CaesarCipher cc{key};
 
 	for (unsigned int i{0}; i < textSize; ++i){
-		std::string encryptString{(encryptText[i])};
-		std::string textString {(caesarText[(i + key) % textSize])};
-
-		REQUIRE (encryptString == textString);
+		REQUIRE (encryptText[i] == cc.applyCipher(plainText[i], CipherMode::Encrypt) );
 	}
 
 }
 
 TEST_CASE("Caesar Cipher decrypt has been implemented", "[alphanumeric]") {
 
-	std::vector<char> caesarText{'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z','A', 'B', 'C', 'D', 'E'};
-
-	std::vector<char> decryptText{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+	std::vector<std::string> plainText{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+	std::vector<std::string> encryptText{"F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E"};
 	
 
-	const size_t textSize = caesarText.size();
-	int key = 5;  // define a key to test here
+	const size_t textSize = plainText.size();
+	const size_t key = 5; // define a key to test here
+	CaesarCipher cc{key};
 
 	for (unsigned int i{0}; i < textSize; ++i){
-		std::string decryptString{(decryptText[i])};
-		std::string textString {caesarText[ (i + textSize - key) % textSize]};
-
-		REQUIRE (decryptString == textString);
+		REQUIRE (plainText[i] == cc.applyCipher(encryptText[i], CipherMode::Decrypt) );
 	}
 
 }

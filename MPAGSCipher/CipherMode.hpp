@@ -7,8 +7,8 @@
 
 enum class CipherMode{
 
-	encrypt, /// < Changes letters by some key of an original file to encrypt
-	decrypt  /// < Changed letters by some key of an exncrypted file to the original
+	Encrypt, /// < Changes letters by some key of an original file to encrypt
+	Decrypt  /// < Changed letters by some key of an exncrypted file to the original
 };
 
 #endif

@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
   // Options that might be set by the command-line arguments
 
-  ProgramSettings prog_settings{false,false,"","","", CipherMode::encrypt};
+  ProgramSettings prog_settings{false,false,"","","", CipherMode::Encrypt};
 
   // Process command line arguments
   bool cmdLineStatus { processCommandLine(cmdLineArgs, prog_settings )};
@@ -91,27 +91,27 @@ int main(int argc, char* argv[])
   // We have the key as a string, but the Caesar cipher needs an unsigned long, so we first need to convert it
   // We default to having a key of 0, i.e. no encryption, if no key was provided on the command line
   size_t caesar_key {0};
-  if ( ! prog_settings.cipher_key.empty() ) {
+  if ( ! prog_settings.cipherKey.empty() ) {
     // Before doing the conversion we should check that the string contains a valid positive integer.
     // Here we do that by looping through each character and checking that it is a digit.
     // (Since the conversion function will throw an exception if the string does
     // not represent a valid integer, we could have checked for and handled
     // that instead but we do not cover exceptions at all in this course - they
     // are a very complex area of C++ that could take an entire course on their own!)
-    for ( const auto& elem : prog_settings.cipher_key ) {
+    for ( const auto& elem : prog_settings.cipherKey ) {
       if ( ! std::isdigit(elem) ) {
 	std::cerr << "[error] cipher key must be an unsigned long integer for Caesar cipher,\n"
-	          << "        the supplied key (" << prog_settings.cipher_key << ") could not be successfully converted" << std::endl;
+	          << "        the supplied key (" << prog_settings.cipherKey << ") could not be successfully converted" << std::endl;
 	return 1;
       }
     }
-    caesar_key = std::stoul(prog_settings.cipher_key);
+    caesar_key = std::stoul(prog_settings.cipherKey);
   }
 
   // Run the Caesar cipher (using the specified key and encrypt/decrypt flag) on the input text
 
   CaesarCipher caesar{caesar_key};
-  std::string outputText { caesar.applyCipher(inputText, prog_settings.encrypt)};
+  std::string outputText { caesar.applyCipher(inputText, prog_settings.cipherMode)};
 
   // Output the transliterated text
   if (!prog_settings.outputFile.empty()) {

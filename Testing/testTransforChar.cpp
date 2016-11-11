@@ -15,6 +15,7 @@ TEST_CASE("Characters are uppercase", "[alphanumeric]") {
 	for (unsigned int i =0; i < alphaSize; ++i){
 		std::string upperCase {alphaUpper[i]};
 		REQUIRE (transformChar(alphaLower[i]) == upperCase);
+		REQUIRE (transformChar(alphaUpper[i]) == upperCase);
 	}
 } 	
 

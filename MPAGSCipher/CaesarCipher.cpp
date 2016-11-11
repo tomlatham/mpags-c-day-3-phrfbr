@@ -3,6 +3,9 @@
 
 #include "CaesarCipher.hpp"
 
+// The Doxygen documentation is generally only placed in the header files.
+// So comments in the source code can just use normal commenting style
+
 /** The CaesarCipher.cpp part that actually defines what is going to be done
 	*
 	*
@@ -10,14 +13,14 @@
 **/
 
 /// Calling the CaesarCipher class
-CaesarCipher::CaesarCipher(size_t& key) 
+CaesarCipher::CaesarCipher(const size_t key) 
 	:key_{key}
 
 {
 }
 
 /// Call the applyCipher 
-std::string CaesarCipher::applyCipher(const std::string& inputText, CipherMode encrypt) const
+std::string CaesarCipher::applyCipher(const std::string& inputText, const CipherMode mode) const
 {
 
 /// Do the CaesarCipher
@@ -42,7 +45,7 @@ std::string CaesarCipher::applyCipher(const std::string& inputText, CipherMode e
 	/** Apply the appropriate shift (depending on whether we're encrypting
 	   or decrypting) and determine the new character **/
 	// Can then break out of the loop over the alphabet
-	if ( encrypt == CipherMode::encrypt ) {
+	if ( mode == CipherMode::Encrypt ) {
 	  processedChar = alphabet_[ (i + key_) % alphabetSize ];
 	} else {
 	  processedChar = alphabet_[ (i + alphabetSize - key_) % alphabetSize ];
